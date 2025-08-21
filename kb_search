@@ -1,0 +1,35 @@
+openapi: 3.0.0
+info:
+  title: KB Search API
+  version: "1.0.0"
+paths:
+  /kb/search:
+    get:
+      summary: Busca na base de conhecimento e retorna top-k trechos citáveis
+      parameters:
+        - in: query
+          name: q
+          schema: { type: string }
+          required: true
+        - in: query
+          name: top_k
+          schema: { type: integer, default: 3 }
+      responses:
+        "200":
+          description: Resultados
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  hits:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        titulo: { type: string }
+                        trecho: { type: string }
+                        fonte: { type: string }   # ex: "FAQ — Objetivos"
+                        url: { type: string }
+servers:
+  - url: https://SEU_HOST/kb
