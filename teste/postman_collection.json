@@ -1,0 +1,199 @@
+{
+  "info": {
+    "name": "Agente Validador Sandbox CAIXA",
+    "description": "Coleção de testes para as APIs do Agente Validador - reduzindo decisões de 90 dias para 1 dia",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:8080",
+      "type": "string"
+    }
+  ],
+  "item": [
+    {
+      "name": "Health Check",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/health",
+          "host": ["{{baseUrl}}"],
+          "path": ["health"]
+        }
+      }
+    },
+    {
+      "name": "Cenário 1: Habitação - Push 3 dias",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"experimento\": {\n    \"problema\": \"Baixa adesão ao push de notificações de habitação (82%), impactando engajamento e conversão em financiamentos.\",\n    \"hipotese\": \"Se implementarmos push personalizado com timing otimizado, então aumentaremos a taxa de abertura de 82% para 86%, medido por taxa de clique em 30 dias.\",\n    \"kpi\": \"Taxa de abertura de push de habitação\",\n    \"baseline\": \"82%\",\n    \"alvo\": \"86%\",\n    \"plano_teste\": \"Teste A/B com 2 milhões de usuários, 50/50 split, amostra de 20.000 por grupo, duração 30 dias, segmentação por perfil de renda e região.\",\n    \"riscos_lgpd\": \"Consentimento via opt-in no onboarding, opt-out disponível nas configurações, retenção de dados por 2 anos, minimização via anonimização de dados sensíveis.\",\n    \"unidade_gestora\": \"GIHAB - Gerência de Habitação\",\n    \"patrocinador\": \"Diretoria de Habitação\",\n    \"dependencias\": \"Integração com plataforma de push, segmentação de base de clientes\",\n    \"referencias\": \"Benchmark Banco do Brasil: aumento de 15% em push personalizados (2023)\"\n  }\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/score-api/score",
+          "host": ["{{baseUrl}}"],
+          "path": ["score-api", "score"]
+        }
+      }
+    },
+    {
+      "name": "Cenário 2: Cartões - Open Finance",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"experimento\": {\n    \"problema\": \"Taxa de aprovação de cartões limitada por análise de crédito tradicional, perdendo clientes qualificados para concorrência.\",\n    \"hipotese\": \"Se utilizarmos dados do Open Finance na análise de crédito, então aumentaremos aprovação em 25% mantendo mesmo nível de NPL, medido por taxa de aprovação e inadimplência em 90 dias.\",\n    \"kpi\": \"Taxa de aprovação de cartões sem aumento de NPL\",\n    \"baseline\": \"65% aprovação, NPL 3.2%\",\n    \"alvo\": \"81% aprovação, NPL ≤3.2%\",\n    \"plano_teste\": \"Teste A/B com 20.000 solicitações, grupo controle (análise tradicional) vs grupo teste (Open Finance), duração 4 semanas, acompanhamento de NPL por 90 dias.\",\n    \"riscos_lgpd\": \"Consentimento explícito para uso de dados Open Finance, opt-out a qualquer momento, retenção conforme regulamentação BACEN, pseudonimização de dados pessoais.\",\n    \"unidade_gestora\": \"GECRE - Gerência de Crédito\",\n    \"patrocinador\": \"Diretoria de Negócios\",\n    \"dependencias\": \"API Open Finance, modelo de ML atualizado, compliance BACEN\",\n    \"referencias\": \"Estudo FEBRABAN 2023: Open Finance reduz NPL em 18% com aumento de 22% em aprovações\"\n  }\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/score-api/score",
+          "host": ["{{baseUrl}}"],
+          "path": ["score-api", "score"]
+        }
+      }
+    },
+    {
+      "name": "Cenário 3: Bem-estar - Clubes de Mangá",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"experimento\": {\n    \"problema\": \"Alta rotatividade de funcionários (18% ao ano) impacta produtividade e custos de recontratação, especialmente em áreas técnicas.\",\n    \"hipotese\": \"Se criarmos clubes de interesse (mangá, livros, games) para funcionários, então reduziremos turnover de 18% para 14%, medido por taxa de desligamento voluntário em 12 meses.\",\n    \"kpi\": \"Taxa de turnover voluntário anual\",\n    \"baseline\": \"18% ao ano\",\n    \"alvo\": \"14% ao ano\",\n    \"plano_teste\": \"Teste A/B com funcionários de TI e operações, grupo controle vs grupo com acesso a clubes, amostra mínima 1.000 funcionários por grupo, duração 6 meses, enquetes de satisfação anônimas mensais.\",\n    \"riscos_lgpd\": \"Participação voluntária com consentimento, enquetes anônimas, opt-out sem penalização, retenção de dados por período do experimento, anonimização completa dos resultados.\",\n    \"unidade_gestora\": \"GERHU - Gerência de Recursos Humanos\",\n    \"patrocinador\": \"Diretoria de Pessoas e Gestão\",\n    \"dependencias\": \"Plataforma interna de comunidades, orçamento para atividades\",\n    \"referencias\": \"Google: programas de bem-estar reduzem turnover em 27% (Harvard Business Review, 2022)\"\n  }\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/score-api/score",
+          "host": ["{{baseUrl}}"],
+          "path": ["score-api", "score"]
+        }
+      }
+    },
+    {
+      "name": "Cenário 4: LGPD Incompleto (deve bloquear)",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"experimento\": {\n    \"problema\": \"Baixa conversão em produtos de investimento para clientes PF, perdendo receita de spread.\",\n    \"hipotese\": \"Se oferecermos recomendações personalizadas baseadas em histórico, então aumentaremos conversão em 30%.\",\n    \"kpi\": \"Taxa de conversão em produtos de investimento\",\n    \"baseline\": \"8%\",\n    \"alvo\": \"10.4%\",\n    \"plano_teste\": \"Teste com 50.000 clientes, recomendações via app e email, duração 2 meses.\",\n    \"riscos_lgpd\": \"Vamos usar os dados dos clientes para personalização.\",\n    \"unidade_gestora\": \"GEINV - Gerência de Investimentos\",\n    \"patrocinador\": \"Diretoria Comercial\",\n    \"dependencias\": \"Sistema de recomendação, base de dados de clientes\",\n    \"referencias\": \"\"\n  }\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/score-api/score",
+          "host": ["{{baseUrl}}"],
+          "path": ["score-api", "score"]
+        }
+      }
+    },
+    {
+      "name": "Teste Ticket - Cenário Habitação",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"classificacao\": \"experimento\",\n  \"resumo_executivo\": \"Experimento para aumentar adesão ao push de habitação de 82% para 86% através de personalização e timing otimizado, com teste A/B em 40k usuários por 30 dias.\",\n  \"score\": 72,\n  \"fase\": 2,\n  \"trl\": 6,\n  \"ods\": [\n    {\"id\": 8, \"titulo\": \"Trabalho Decente e Crescimento Econômico\", \"justificativa\": \"Facilita acesso ao crédito habitacional\"},\n    {\"id\": 9, \"titulo\": \"Inovação e Infraestrutura\", \"justificativa\": \"Implementa tecnologia de push personalizado\"}\n  ],\n  \"parecer\": \"Experimento bem estruturado com LGPD adequado, baseline clara e plano A/B robusto. Recomendado para Fase 2.\",\n  \"proximos_passos\": [\n    \"Aprovação da diretoria de habitação\",\n    \"Setup da infraestrutura de push personalizado\",\n    \"Segmentação da base de 2M usuários\",\n    \"Início do teste A/B com 40k usuários\"\n  ],\n  \"experimento\": {\n    \"problema\": \"Baixa adesão ao push de notificações de habitação (82%)\",\n    \"kpi\": \"Taxa de abertura de push de habitação\",\n    \"baseline\": \"82%\",\n    \"alvo\": \"86%\"\n  },\n  \"anexos\": [\n    {\"nome\": \"score_detalhado.json\", \"url\": \"/anexos/score_hab_001.json\"}\n  ]\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/ticket-api/tickets",
+          "host": ["{{baseUrl}}"],
+          "path": ["ticket-api", "tickets"]
+        }
+      }
+    },
+    {
+      "name": "Busca KB - LGPD",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/kb/kb/search?q=LGPD&top_k=3",
+          "host": ["{{baseUrl}}"],
+          "path": ["kb", "kb", "search"],
+          "query": [
+            {
+              "key": "q",
+              "value": "LGPD"
+            },
+            {
+              "key": "top_k",
+              "value": "3"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "Busca KB - Scoring",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/kb/kb/search?q=scoring&top_k=2",
+          "host": ["{{baseUrl}}"],
+          "path": ["kb", "kb", "search"],
+          "query": [
+            {
+              "key": "q",
+              "value": "scoring"
+            },
+            {
+              "key": "top_k",
+              "value": "2"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "Busca KB - Metodologia",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/kb/kb/search?q=metodologia&top_k=3",
+          "host": ["{{baseUrl}}"],
+          "path": ["kb", "kb", "search"],
+          "query": [
+            {
+              "key": "q",
+              "value": "metodologia"
+            },
+            {
+              "key": "top_k",
+              "value": "3"
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

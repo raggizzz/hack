@@ -1,0 +1,39 @@
+{
+  "classificacao": "Experimento",
+  "resumo_executivo": "Experimento para aumentar adesão ao push de notificações de habitação através de personalização e timing otimizado. Baseline atual de 82% com meta de 86% em 30 dias. Metodologia A/B com 2 milhões de usuários, segmentação por perfil de renda e região. LGPD conforme com consentimento opt-in, opt-out disponível e retenção de 2 anos.",
+  "score": 90,
+  "fase": 3,
+  "trl": 6,
+  "ods": [
+    {
+      "id": 8,
+      "titulo": "Trabalho decente e crescimento econômico",
+      "justificativa": "Impacta retenção, produtividade e qualidade do trabalho."
+    },
+    {
+      "id": 9,
+      "titulo": "Indústria, inovação e infraestrutura",
+      "justificativa": "Inovação de processo/tecnologia na operação bancária."
+    }
+  ],
+  "parecer": "Experimento maduro, pronto para fase avançada. LGPD conforme, metodologia robusta.",
+  "proximos_passos": [
+    "Prosseguir com implementação do sistema de push personalizado",
+    "Configurar segmentação de usuários por perfil de renda e região",
+    "Monitorar KPIs definidos durante os 30 dias de teste",
+    "Avaliar resultados e decidir sobre expansão para toda a base"
+  ],
+  "experimento": {
+    "problema": "Baixa adesão ao push de notificações de habitação (82%), impactando engajamento e conversão em financiamentos.",
+    "hipotese": "Se implementarmos push personalizado com timing otimizado, então aumentaremos a taxa de abertura de 82% para 86%, medido por taxa de clique em 30 dias.",
+    "kpi": "Taxa de abertura de push de habitação",
+    "baseline": "82%",
+    "alvo": "86%",
+    "plano_teste": "Teste A/B com 2 milhões de usuários, 50/50 split, amostra de 20.000 por grupo, duração 30 dias, segmentação por perfil de renda e região.",
+    "riscos_lgpd": "Consentimento via opt-in no onboarding, opt-out disponível nas configurações, retenção de dados por 2 anos, minimização via anonimização de dados sensíveis.",
+    "unidade_gestora": "GIHAB - Gerência de Habitação",
+    "patrocinador": "Diretoria de Habitação",
+    "dependencias": "Integração com plataforma de push, segmentação de base de clientes",
+    "referencias": "Benchmark Banco do Brasil: aumento de 15% em push personalizados (2023)"
+  }
+}
